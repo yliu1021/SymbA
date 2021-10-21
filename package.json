@@ -2,7 +2,7 @@
   "name": "symba",
   "description": "Electron/React frontend for OCaml CAS",
   "author": "Yuhan Liu <yliu1021@outlook.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
