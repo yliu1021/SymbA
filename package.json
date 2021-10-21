@@ -8,9 +8,9 @@
   "homepage": "./",
   "build": {
     "files": [
-      "build/**/*",
-      "node_modules/**/*"
+      "build/**/*"
     ],
+    "productName": "SymbA",
     "publish": {
       "provider": "github",
       "repo": "SymbA",
@@ -18,13 +18,17 @@
     }
   },
   "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "electron": "^15.3.0",
+    "electron-builder": "^22.13.1",
+    "web-vitals": "^2.1.2",
+    "react-scripts": "^4.0.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^4.0.3",
-    "web-vitals": "^2.1.2"
+    "@testing-library/user-event": "^13.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -58,9 +62,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "electron": "^15.3.0",
-    "electron-builder": "^22.13.1"
   }
 }
