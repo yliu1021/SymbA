@@ -74,6 +74,7 @@ function Calculator({wsURL, onSubmit}) {
             <input
                 className={"UserInput"}
                 value={input}
+                autoFocus
                 onChange={onChange}
                 onKeyDown={(event) => {
                     if (event.keyCode === 13) {

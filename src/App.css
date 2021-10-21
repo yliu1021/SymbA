@@ -1,9 +1,7 @@
 .App {
-    width: min(800px, 80%);
-    height: calc(100vh - 2px);
+    height: 100vh;
     display: flex;
     flex-flow: column;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2px;
 }
