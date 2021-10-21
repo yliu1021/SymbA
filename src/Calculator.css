@@ -1,0 +1,26 @@
+.Calculator {
+    border: 1px solid;
+}
+
+.Divider {
+    margin: 0 8px 0 8px;
+    padding: 0;
+}
+
+.UserInput {
+    border: none;
+    outline: none;
+    font-size: 32px;
+    height: 36px;
+    width: calc(100% - 40px);
+    margin: 0;
+    padding: 20px;
+}
+
+.UserOutput {
+    vertical-align: middle;
+    height: 24px;
+    width: calc(100% - 40px);
+    margin: 0;
+    padding: 8px 20px 8px 20px;
+}
