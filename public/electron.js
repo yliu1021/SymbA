@@ -1,6 +1,5 @@
 const {app, BrowserWindow, globalShortcut} = require('electron')
 const path = require('path');
-const url = require('url');
 
 let currWin = undefined;
 
@@ -23,11 +22,8 @@ function createWindow() {
         }
     })
     currWin.removeMenu();
-    //load the index.html from a url
     const startUrl = process.env.ELECTRON_START_URL || `file://${path.join(__dirname, './index.html')}`;
     currWin.loadURL(startUrl);
-    // Open the DevTools.
-    // currWin.webContents.openDevTools()
 }
 
 function closeWindow() {
@@ -67,5 +63,4 @@ app.on('activate', () => {
     }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+app.dock.hide();

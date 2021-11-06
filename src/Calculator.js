@@ -1,48 +1,11 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import "./Calculator.css";
-
-let ws = undefined;
+import {eval as casEval} from "./js_cas/js_cas.js"
 
 function Calculator({wsURL, onSubmit}) {
-    const [connected, setConnected] = useState(false);
     const [input, setInput] = useState("");
-    const [casResponse, setCASResponse] = useState({"query": "", "response": "0"});
     const [output, setOutput] = useState("0");
     const [outputUpdated, setOutputUpdated] = useState(true);
-
-    useEffect(() => {
-        ws = new WebSocket(wsURL);
-        ws.onopen = () => {
-            setConnected(true);
-        };
-        ws.onmessage = (msg) => {
-            setCASResponse(JSON.parse(msg.data));
-        };
-        ws.onclose = () => {
-            setConnected(false);
-        };
-        return () => {
-            if (ws && (ws.readyState !== WebSocket.CLOSED || ws.readyState !== WebSocket.CLOSING)) {
-                setConnected(false);
-                ws.onclose = () => {
-                };
-                ws.close();
-                ws = undefined;
-            }
-        }
-    }, [wsURL]);
-
-    useEffect(() => {
-        if (input === "") {
-            setOutput("0");
-            setOutputUpdated(true);
-        } else if (casResponse["query"] === input && !isNaN(parseFloat(casResponse["response"]))) {
-            setOutput(casResponse["response"]);
-            setOutputUpdated(true);
-        } else {
-            setOutputUpdated(false);
-        }
-    }, [casResponse, input]);
 
     function onChange(e) {
         const val = e.target.value;
@@ -50,9 +13,16 @@ function Calculator({wsURL, onSubmit}) {
         if (val === "") {
             setOutput("0");
             setOutputUpdated(true);
-        } else if (ws.readyState === WebSocket.OPEN) {
-            setOutputUpdated(false);
-            ws.send(val);
+        } else {
+            const casRes = JSON.parse(casEval(val));
+            console.log(casRes);
+            if (casRes["success"] && casRes["number"] != null) {
+                const resNumber = casRes["number"];
+                setOutput(resNumber);
+                setOutputUpdated(true);
+            } else {
+                setOutputUpdated(false);
+            }
         }
     }
 
@@ -63,14 +33,11 @@ function Calculator({wsURL, onSubmit}) {
         }
     }
 
-    const calculatorStyle = {
-        borderColor: connected ? "green" : "red"
-    };
     const outputStyle = {
         color: outputUpdated ? "black" : "lightgray"
     };
     return (
-        <div className={"Calculator"} style={calculatorStyle}>
+        <div className={"Calculator"}>
             <input
                 className={"UserInput"}
                 value={input}
